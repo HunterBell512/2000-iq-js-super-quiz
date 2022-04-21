@@ -1,0 +1,57 @@
+@font-face {
+    font-family: "Fira Code";
+    src: url("../fonts/Fira\ Code\ Bold\ Nerd\ Font\ Complete\ Mono.ttf");
+}
+
+* {
+    font-family: "Fira Code";
+}
+
+button {
+    background-color: rgb(31, 0, 56);
+    color: white;
+    font-size: 22px;
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgba(31, 0, 56, 0.75);
+}
+
+.quiz-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px red solid;
+    padding: 10px;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.quiz-info {
+    margin: 20px auto;
+    text-align: center;
+    border: 1px blue solid;
+    max-width: 100%;
+}
+
+.quiz-info button {
+    margin-bottom: 10px;
+}
+
+.quiz-questions {
+    display: flex;
+    flex-direction: column;
+    max-width: fit-content;
+    border: 1px green solid;
+    padding: 10px;
+}
+
+.quiz-questions button {
+    text-align: left;
+    margin: 5px 0;
+    max-width: fit-content;
+}
+
