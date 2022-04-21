@@ -9,12 +9,15 @@
     </head>
 
     <body>
-        <button>View Highscores</button>
+        <div class="hud">
+            <button>View Highscores</button>
+            <p>Time: <span class="timer"">0</span></p>
+        </div>
 
         <div class="quiz-container">
             <div class="quiz-info">
-                <h1 class="question">2000 IQ Javascript Super Quiz</h1>
-                <p>
+                <h1 id="question">2000 IQ Javascript Super Quiz</h1>
+                <p id="intro-text">
                     Hello and welcome, contestant, to Hunter Bell's
                     2000 IQ Javascript Super Quiz. I had to make this in about
                     3 hours against my will in a basement with no food or water (please send help).
@@ -22,14 +25,10 @@
                     Javascript fundamentals. Be warned though, you only have 75 seconds to
                     answer all the questions. Good luck!
                 </p>
-                <button type="button">Start Quiz</button>
+                <button id="start-btn">Start Quiz</button>
             </div>
-            <div class="quiz-questions">
-                <!-- <button>Questions</button>
-                <button>Will</button>
-                <button>Go</button>
-                <button>Here</button> -->
-            </div>
+            <div id="quiz-questions" class="quiz-questions"></div>
         </div>
     </body>
+    <script src="./assets/js/script.js"></script>
 </html>

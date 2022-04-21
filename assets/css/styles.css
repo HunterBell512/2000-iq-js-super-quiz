@@ -21,25 +21,60 @@ button:hover {
     background-color: rgba(31, 0, 56, 0.75);
 }
 
+.hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px orange solid;
+}
+
+.hud p {
+    margin-right: 30px;
+}
+
+.hud p,
+.timer {
+    font-size: 32px;
+    border: 1px purple solid;
+}
+
 .quiz-container {
     display: flex;
     flex-direction: column;
     border: 1px red solid;
     padding: 10px;
-    max-width: 50%;
-    margin: 0 auto;
+    max-width: 70%;
+    margin: 10px auto;
 }
 
+/* Begin Quiz-Info Styles */
 .quiz-info {
-    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
     text-align: center;
     border: 1px blue solid;
     max-width: 100%;
 }
 
+.quiz-info h1 {
+    font-size: 40px;
+    margin: 0;
+    /* border: black 1px solid; */
+}
+
+.quiz-info p {
+    font-size: 26px;
+    /* border: black 1px solid; */
+}
+
 .quiz-info button {
     margin-bottom: 10px;
+    max-width: fit-content;
+    margin: 0 auto;
+    /* border: black 1px solid; */
 }
+/* END QUIZ-INFO STYLES */
 
 .quiz-questions {
     display: flex;
