@@ -12,9 +12,9 @@ var questions = [
         correct: "Console"
     },
     {
-        question: "What is NOT a commonly used data type?",
-        answers: ["Boolean", "String", "Console", "Integers"],
-        correct: "Console"
+        question: "What Javascript method is used to select an element by its attribute?",
+        answers: [".getAttribute()", ".setAttribute()", ".getSelector()", ".querySelector()"],
+        correct: ".querySelector()"
     },
     {
         question: "What is NOT a commonly used data type?",
@@ -42,13 +42,24 @@ var startQuiz = function() {
 }
 
 var loadQuestion = function () {
-    console.log("called")
-    questionEl.textContent = questions[questionNum].question;
-    for (var i = 0; i < 4; i++) {
-        var questionButton = document.createElement("button");
-        questionButton.setAttribute("data-answer", questions[questionNum].answers[i]);
-        questionButton.textContent = letterEquiv[i] + ". " + questions[questionNum].answers[i];
-        questionBox.appendChild(questionButton);
+    if (questionBox.hasChildNodes()) {
+        console.log("inside if statement")
+        questionEl.textContent = questions[questionNum].question;
+        for (var i = 0; i < 4; i++) {
+            var targetAnswer = document.querySelector("button[data-answer-number='" + i + "']");
+            targetAnswer.setAttribute("data-answer", questions[questionNum].answers[i]);
+            targetAnswer.textContent = letterEquiv[i] + ". " + questions[questionNum].answers[i];
+        }
+    } else {
+        console.log("called")
+        questionEl.textContent = questions[questionNum].question;
+        for (var i = 0; i < 4; i++) {
+            var questionButton = document.createElement("button");
+            questionButton.setAttribute("data-answer", questions[questionNum].answers[i]);
+            questionButton.setAttribute("data-answer-number", i);
+            questionButton.textContent = letterEquiv[i] + ". " + questions[questionNum].answers[i];
+            questionBox.appendChild(questionButton);
+        }
     }
 
     questionNum++;
