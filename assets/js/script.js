@@ -2,6 +2,7 @@ var questionNum = 0;
 var correctAnswers = 0;
 var timeLeft = 5;
 var quizEnded = false;
+var userIndex;
 var letterEquiv = ['A', 'B', 'C', 'D']
 var startButton = document.querySelector("#start-btn");
 var questionEl = document.querySelector("#quiz-prompt");
@@ -9,6 +10,13 @@ var introText = document.querySelector("#intro-text");
 var questionBox = document.querySelector("#quiz-questions");
 var quizContainer = document.querySelector("#quiz-container");
 var timer = document.querySelector("#timer");
+
+if (localStorage.getItem("index")) {
+    userIndex = parseInt(localStorage.getItem("index"));
+    userIndex++;
+} else {
+    userIndex = 0;
+}
 
 var questions = [
     {
@@ -77,6 +85,7 @@ var endQuiz = function () {
     var formEl = document.createElement("form");
     var nameInputEl = document.createElement("input");
     var submitButton = document.createElement("button");
+    submitButton.setAttribute("type", "button");
     submitButton.textContent = "Submit";
     nameInputEl.setAttribute("type", "text");
     nameInputEl.setAttribute("placeholder", "Enter Your Name");
@@ -86,7 +95,8 @@ var endQuiz = function () {
     quizContainer.appendChild(formEl);
 
     submitButton.addEventListener("click", function (event) {
-        submitScore(event, nameInputEl.value);
+        console.log("called")
+        submitScore(nameInputEl.value, correctAnswers, timeLeft);
     }, false);
 }
 
@@ -130,9 +140,15 @@ var checkAnswer = function (selected) {
     }
 }
 
-var submitScore = function (event, name) {
-    event.preventDefault();
-    console.log(name);
+var submitScore = function (name, score, time) {
+    var userData = {
+        name: name,
+        score: score,
+        time: time
+    }
+    localStorage.setItem("index", userIndex);
+    localStorage.setItem("user" + userIndex, JSON.stringify(userData));
+    userIndex++;
 }
 
 startButton.addEventListener("click", startQuiz);
