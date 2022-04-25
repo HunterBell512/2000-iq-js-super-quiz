@@ -25,7 +25,6 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px orange solid;
 }
 
 .hud p {
@@ -35,13 +34,11 @@ button:hover {
 .hud p,
 .timer {
     font-size: 32px;
-    border: 1px purple solid;
 }
 
 .quiz-container {
     display: flex;
     flex-direction: column;
-    border: 1px red solid;
     padding: 10px;
     max-width: 70%;
     margin: 10px auto;
@@ -53,7 +50,6 @@ button:hover {
     flex-direction: column;
     margin: 10px 0;
     text-align: center;
-    border: 1px blue solid;
     max-width: 100%;
 }
 
@@ -80,8 +76,6 @@ button:hover {
     display: flex;
     flex-direction: column;
     max-width: 50%;
-    border: 1px green solid;
-    padding: 10px;
 }
 
 .quiz-questions button {
