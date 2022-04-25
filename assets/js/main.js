@@ -9,6 +9,7 @@ var questionEl = document.querySelector("#quiz-prompt");
 var introText = document.querySelector("#intro-text");
 var questionBox = document.querySelector("#quiz-questions");
 var quizContainer = document.querySelector("#quiz-container");
+var correct = document.querySelector("#show-correct");
 var timer = document.querySelector("#timer");
 
 if (localStorage.getItem("index")) {
@@ -76,6 +77,7 @@ var endQuiz = function () {
     quizEnded = true;
 
     questionBox.remove();
+    correct.remove();
     if (timeLeft > 1) {
         questionEl.innerHTML = "You finished the quiz with " + correctAnswers + " correct answers and " + timeLeft + " seconds remaining.<br/>Make sure to log your highscore!"
     } else {
@@ -140,6 +142,7 @@ var loadQuestion = function () {
 var checkAnswer = function (selected) {
     if (selected.getAttribute("data-answer") == questions[questionNum].correct) {
         correctAnswers++;
+        showCorrect("correct");
     } else {
         timeLeft -= 15;
         if (timeLeft > 0) {
@@ -147,7 +150,8 @@ var checkAnswer = function (selected) {
         } else {
             timeLeft = 0;
             timer.textContent = timeLeft;
-        } 
+        }
+        showCorrect("wrong");
     }
 }
 
@@ -160,6 +164,16 @@ var submitScore = function (name, score, time) {
     localStorage.setItem("index", userIndex);
     localStorage.setItem("user" + userIndex, JSON.stringify(userData));
     window.location.href="./scores.html"
+}
+
+var showCorrect = function (check) {
+    correct.setAttribute("class", "message");
+
+    if (check == "correct") {
+        correct.textContent = "Correct!";
+    } else if (check == "wrong") {
+        correct.textContent = "Wrong!";
+    }
 }
 
 startButton.addEventListener("click", startQuiz);

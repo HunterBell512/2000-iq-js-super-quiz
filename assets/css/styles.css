@@ -7,6 +7,17 @@
     font-family: "Fira Code";
 }
 
+form {
+    margin: 0 auto;
+}
+
+input {
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 15px;
+    margin-right: 10px;
+}
+
 button,
 a {
     background-color: rgb(31, 0, 56);
@@ -47,7 +58,6 @@ a:hover {
     margin: 10px auto;
 }
 
-/* Begin Quiz-Info Styles */
 .quiz-info {
     display: flex;
     flex-direction: column;
@@ -87,13 +97,11 @@ a:hover {
     max-width: fit-content;
 }
 
-form {
-    margin: 0 auto;
-}
-
-input {
-    font-size: 22px;
-    padding: 10px;
-    border-radius: 15px;
-    margin-right: 10px;
+.message {
+    text-align: left;
+    font-size: 30px;
+    color: #888888;
+    border-top-color: #888888;
+    border-top-style: solid;
+    border-top-width: 1px;
 }
