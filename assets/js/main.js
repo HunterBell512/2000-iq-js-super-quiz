@@ -1,6 +1,6 @@
 var questionNum = 0;
 var correctAnswers = 0;
-var timeLeft = 5;
+var timeLeft = 75;
 var quizEnded = false;
 var userIndex;
 var letterEquiv = ['A', 'B', 'C', 'D']
@@ -95,8 +95,11 @@ var endQuiz = function () {
     quizContainer.appendChild(formEl);
 
     submitButton.addEventListener("click", function (event) {
-        console.log("called")
-        submitScore(nameInputEl.value, correctAnswers, timeLeft);
+        if (nameInputEl.value == "") {
+            return;
+        } else {
+            submitScore(nameInputEl.value, correctAnswers, timeLeft);
+        }
     }, false);
 }
 
@@ -137,6 +140,14 @@ var loadQuestion = function () {
 var checkAnswer = function (selected) {
     if (selected.getAttribute("data-answer") == questions[questionNum].correct) {
         correctAnswers++;
+    } else {
+        timeLeft -= 15;
+        if (timeLeft > 0) {
+            timer.textContent = timeLeft;
+        } else {
+            timeLeft = 0;
+            timer.textContent = timeLeft;
+        } 
     }
 }
 
@@ -148,7 +159,7 @@ var submitScore = function (name, score, time) {
     }
     localStorage.setItem("index", userIndex);
     localStorage.setItem("user" + userIndex, JSON.stringify(userData));
-    userIndex++;
+    window.location.href="./scores.html"
 }
 
 startButton.addEventListener("click", startQuiz);

@@ -7,7 +7,8 @@
     font-family: "Fira Code";
 }
 
-button {
+button,
+a {
     background-color: rgb(31, 0, 56);
     color: white;
     font-size: 22px;
@@ -15,9 +16,11 @@ button {
     padding: 10px;
     border-radius: 15px;
     cursor: pointer;
+    text-decoration: none;
 }
 
-button:hover {
+button:hover,
+a:hover {
     background-color: rgba(31, 0, 56, 0.75);
 }
 
