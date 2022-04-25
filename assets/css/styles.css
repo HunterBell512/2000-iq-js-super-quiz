@@ -90,3 +90,13 @@ button:hover {
     max-width: fit-content;
 }
 
+form {
+    margin: 0 auto;
+}
+
+input {
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 15px;
+    margin-right: 10px;
+}
