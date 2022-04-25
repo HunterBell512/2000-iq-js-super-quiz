@@ -79,7 +79,7 @@ button:hover {
 .quiz-questions {
     display: flex;
     flex-direction: column;
-    max-width: fit-content;
+    max-width: 50%;
     border: 1px green solid;
     padding: 10px;
 }

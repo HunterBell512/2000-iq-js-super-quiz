@@ -1,13 +1,14 @@
 var questionNum = 0;
+var correctAnswers = 0;
 var letterEquiv = ['A', 'B', 'C', 'D']
 var startButton = document.querySelector("#start-btn");
-var questionEl = document.querySelector("#question");
+var questionEl = document.querySelector("#quiz-prompt");
 var introText = document.querySelector("#intro-text");
 var questionBox = document.querySelector("#quiz-questions");
 
 var questions = [
     {
-        question: "What is NOT a commonly used data type?",
+        question: "What is NOT a Javascript data type?",
         answers: ["Boolean", "String", "Console", "Integers"],
         correct: "Console"
     },
@@ -17,19 +18,19 @@ var questions = [
         correct: ".querySelector()"
     },
     {
-        question: "What is NOT a commonly used data type?",
-        answers: ["Boolean", "String", "Console", "Integers"],
-        correct: "Console"
+        question: "Javascript is a ______-side language?",
+        answers: ["Server", "Client", "Both", "Neither"],
+        correct: "Both"
     },
     {
-        question: "What is NOT a commonly used data type?",
-        answers: ["Boolean", "String", "Console", "Integers"],
-        correct: "Console"
+        question: "Which method is used to write an alert to the window?",
+        answers: ["alert()", "sendAlert()", "prompt()", "message()"],
+        correct: "alert()"
     },
     {
-        question: "What is NOT a commonly used data type?",
-        answers: ["Boolean", "String", "Console", "Integers"],
-        correct: "Console"
+        question: "What best describes the '= = =' operator?",
+        answers: ["set equal to", "strict equality", "equal to", "greater than"],
+        correct: "strict equality"
     }
 ]
 
@@ -42,16 +43,15 @@ var startQuiz = function() {
 }
 
 var loadQuestion = function () {
+    var shuffledAnswers = shuffleAnswers(questions[questionNum].answers);
     if (questionBox.hasChildNodes()) {
-        console.log("inside if statement")
         questionEl.textContent = questions[questionNum].question;
         for (var i = 0; i < 4; i++) {
             var targetAnswer = document.querySelector("button[data-answer-number='" + i + "']");
-            targetAnswer.setAttribute("data-answer", questions[questionNum].answers[i]);
-            targetAnswer.textContent = letterEquiv[i] + ". " + questions[questionNum].answers[i];
+            targetAnswer.setAttribute("data-answer", shuffledAnswers[i]);
+            targetAnswer.textContent = letterEquiv[i] + ". " + shuffledAnswers[i];
         }
     } else {
-        console.log("called")
         questionEl.textContent = questions[questionNum].question;
         for (var i = 0; i < 4; i++) {
             var questionButton = document.createElement("button");
@@ -61,9 +61,27 @@ var loadQuestion = function () {
             questionBox.appendChild(questionButton);
         }
     }
-
-    questionNum++;
 }
+
+var shuffleAnswers = function (list) {
+    var current = list.length,  randomIndex;
+  
+    while (current != 0) {
+      randomIndex = Math.floor(Math.random() * current);
+      current--;
+      [list[current], list[randomIndex]] = [
+        list[randomIndex], list[current]];
+    }
+  
+    return list;
+}
+
+var checkAnswer = function (selected) {
+    if (selected.getAttribute("data-answer") == questions[questionNum].correct) {
+        correctAnswers++;
+    }
+}
+
 
 startButton.addEventListener("click", startQuiz);
 
@@ -71,6 +89,11 @@ questionBox.addEventListener("click", function (event) {
     var element = event.target;
 
     if (element.matches("button")) {
-        loadQuestion();
+        checkAnswer(element);
+        questionNum++;
+        console.log(correctAnswers);
+        if (questionNum < questions.length) {
+            loadQuestion();
+        }
     }
 });
