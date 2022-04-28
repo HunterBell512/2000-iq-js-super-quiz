@@ -88,7 +88,7 @@ a:hover {
 .quiz-questions {
     display: flex;
     flex-direction: column;
-    max-width: 50%;
+    max-width: 100%;
 }
 
 .quiz-questions button {
@@ -104,4 +104,51 @@ a:hover {
     border-top-color: #888888;
     border-top-style: solid;
     border-top-width: 1px;
+}
+
+@media screen and (max-width: 575px) {
+    .quiz-container {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    form {
+        margin: 0 0 0 -10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    button {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    input {
+        max-width: 100%;
+        margin: 10px auto;
+        border: red 1px solid;
+    }
+
+    .hud p,
+    .timer {
+        font-size: 20px;
+    }
+
+    .quiz-info h1 {
+        font-size: 24px;
+    }
+
+    .quiz-info p {
+        font-size: 18px;
+    }
+
+    .quiz-questions button {
+        font-size: 16px;
+    }
+
+    .message {
+        font-size: 18px;
+    }
+
 }
