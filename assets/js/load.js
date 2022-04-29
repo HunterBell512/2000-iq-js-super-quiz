@@ -30,7 +30,7 @@ var loadScores = function (items) {
 }
 
 var getTopScores = function () {
-    var top = []
+    var top = [];
     var currentLength = top.length;
 
     for (var i = -1; i < parseInt(maxIndex); i++) {
