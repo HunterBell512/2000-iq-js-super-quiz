@@ -12,6 +12,8 @@ var quizContainer = document.querySelector("#quiz-container");
 var correct = document.querySelector("#show-correct");
 var timer = document.querySelector("#timer");
 
+// function to detect if scores have already been saved
+// if yes, then set userIndex to saved index, otherwise set to 0
 if (localStorage.getItem("index")) {
     userIndex = parseInt(localStorage.getItem("index"));
     userIndex++;
@@ -19,6 +21,7 @@ if (localStorage.getItem("index")) {
     userIndex = 0;
 }
 
+// array of question objects
 var questions = [
     {
         question: "What is NOT a Javascript data type?",
@@ -47,6 +50,7 @@ var questions = [
     }
 ]
 
+// function that handles starting the quiz
 var startQuiz = function () {
     introText.remove();
     startButton.remove();
@@ -57,6 +61,7 @@ var startQuiz = function () {
     loadQuestion();
 }
 
+// function that handles the timer
 var countdown = function () {
     var startTimer = setInterval(function() {
         if (timeLeft > 1 && !quizEnded) {
@@ -73,6 +78,7 @@ var countdown = function () {
     }, 1000)
 }
 
+// function to handle when the quiz has ended
 var endQuiz = function () {
     quizEnded = true;
 
@@ -84,6 +90,7 @@ var endQuiz = function () {
         questionEl.innerHTML = "You finished the quiz with " + correctAnswers + " correct answers and " + timeLeft + " second remaining.<br/>Make sure to log your highscore!"
     }
 
+    // create the score submission form elements
     var formEl = document.createElement("form");
     var nameInputEl = document.createElement("input");
     var submitButton = document.createElement("button");
@@ -105,6 +112,7 @@ var endQuiz = function () {
     }, false);
 }
 
+// function to randomize the order in which the answer buttons are added to each question
 var shuffleAnswers = function (list) {
     var current = list.length,  randomIndex;
   
@@ -118,8 +126,11 @@ var shuffleAnswers = function (list) {
     return list;
 }
 
+// this function handles loading questions
 var loadQuestion = function () {
     var shuffledAnswers = shuffleAnswers(questions[questionNum].answers);
+
+    // replace text and properties of answer buttons if the elements already exist
     if (questionBox.hasChildNodes()) {
         questionEl.textContent = questions[questionNum].question;
         for (var i = 0; i < 4; i++) {
@@ -127,7 +138,7 @@ var loadQuestion = function () {
             targetAnswer.setAttribute("data-answer", shuffledAnswers[i]);
             targetAnswer.textContent = letterEquiv[i] + ". " + shuffledAnswers[i];
         }
-    } else {
+    } else { // otherwise create them if it's the quiz just started
         questionEl.textContent = questions[questionNum].question;
         for (var i = 0; i < 4; i++) {
             var questionButton = document.createElement("button");
@@ -139,11 +150,14 @@ var loadQuestion = function () {
     }
 }
 
+// this function handles checking submitted answers for wrong or correct submissions
 var checkAnswer = function (selected) {
+
+    // if selected answer is correct, increment correctAnswers counter and relay 'correct' message
     if (selected.getAttribute("data-answer") == questions[questionNum].correct) {
         correctAnswers++;
         showCorrect("correct");
-    } else {
+    } else { // otherwise subtract time from timer and relay 'wrong' message
         timeLeft -= 15;
         if (timeLeft > 0) {
             timer.textContent = timeLeft;
@@ -155,6 +169,7 @@ var checkAnswer = function (selected) {
     }
 }
 
+// this function handles submitting scores to local storage
 var submitScore = function (name, score, time) {
     var userData = {
         name: name,
@@ -166,6 +181,7 @@ var submitScore = function (name, score, time) {
     window.location.href="./scores.html"
 }
 
+// this function displays a message at the bottom at the screen after answering
 var showCorrect = function (check) {
     correct.setAttribute("class", "message");
 
@@ -176,8 +192,10 @@ var showCorrect = function (check) {
     }
 }
 
+// add event lister to start button
 startButton.addEventListener("click", startQuiz);
 
+// add event listeners to the answer buttons
 questionBox.addEventListener("click", function (event) {
     var element = event.target;
 
